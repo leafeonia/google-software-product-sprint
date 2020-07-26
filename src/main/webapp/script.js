@@ -16,7 +16,7 @@
  * Adds a random greeting to the page.
  */
 function loadTasks() {
-  fetch('/data').then(response => response.json()).then((tasks) => {
+  fetch('/data/').then(response => response.json()).then((tasks) => {
     const taskListElement = document.getElementById('task-list');
     tasks.forEach((task) => {
       taskListElement.appendChild(createTaskElement(task));
