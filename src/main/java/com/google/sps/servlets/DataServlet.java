@@ -21,7 +21,7 @@ import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.gson.Gson;
-import com.google.sps.data.Task;
+import com.google.sps.data.Commodity;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,41 +38,37 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Query query = new Query("Task").addSort("timestamp", SortDirection.DESCENDING);
+    Query query = new Query("Commodity");
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
-    System.out.println("GET!");
-    List<Task> tasks = new ArrayList<>();
+    List<Commodity> commodities = new ArrayList<>();
     for (Entity entity : results.asIterable()) {
       long id = entity.getKey().getId();
-      String title = (String) entity.getProperty("title");
-      long timestamp = (long) entity.getProperty("timestamp");
+      String name = (String) entity.getProperty("name");
+      long number = (long) entity.getProperty("number");
 
-      Task task = new Task(id, title, timestamp);
-      tasks.add(task);
-      System.out.println("debug: "+title);
+      Commodity commodity = new Commodity(name, number);
+      commodities.add(commodity);
     }
 
     Gson gson = new Gson();
 
     response.setContentType("application/json;");
-    response.getWriter().println(gson.toJson(tasks));
+    response.getWriter().println(gson.toJson(commodities));
   }
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-    System.out.println("POST!");
-    String title = request.getParameter("input-title");
-    long timestamp = System.currentTimeMillis();
-    System.out.println("debug: "+title);
-    Entity taskEntity = new Entity("Task");
-    taskEntity.setProperty("title", title);
-    taskEntity.setProperty("timestamp", timestamp);
+    String name = request.getParameter("name");
+    long number = Long.parseLong(request.getParameter("number"));
+    Entity commodityEntity = new Entity("Commodity");
+    commodityEntity.setProperty("name", name);
+    commodityEntity.setProperty("number", number);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    datastore.put(taskEntity);
+    datastore.put(commodityEntity);
 
     response.sendRedirect("/index.html");
   }
