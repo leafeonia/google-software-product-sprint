@@ -6,17 +6,24 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
   </head>
-<body onload="loadTasks()">
+<body>
 <div id="content">
 
     <form action="/data/" method="POST">
-        <p>data</p>
-        <textarea name="input-title">input :)</textarea>
+        <p>库存添加</p>
+        <div>
+            商品名称：
+            <input name="name">
+        </div>
+        <div>
+            添加数量：
+            <input name="number">
+        </div>
         <br/><br/>
         <input type="submit" />
     </form>
 
-    <ul id="task-list"></ul>
+    <ul id="commodity-list"></ul>
 
 </div>
 </body>
