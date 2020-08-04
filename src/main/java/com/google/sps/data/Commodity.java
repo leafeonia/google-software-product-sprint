@@ -14,8 +14,6 @@
 
 package com.google.sps.data;
 
-import java.util.Date;
-
 /** An item on a todo list. */
 public final class Commodity {
 

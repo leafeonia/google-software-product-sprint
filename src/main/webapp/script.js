@@ -28,7 +28,7 @@ function createCommodityElement(commodity) {
   //taskElement.className = 'task';
 
   const titleElement = document.createElement('span');
-  titleElement.innerText = "name: " + commodity.name + "  number: " + commodity.number + "  price: " + commodity.price + "  last modified on: " + commodity.last_time;
+  titleElement.innerText = "id: " + commodity.item_id + ";  name: " + commodity.name + ";  number: " + commodity.number + ";   price: " + commodity.price + ";  last modified on: " + commodity.last_time;
 
   commodityElement.appendChild(titleElement);
   return commodityElement;
