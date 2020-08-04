@@ -14,14 +14,22 @@
 
 package com.google.sps.data;
 
+import java.util.Date;
+
 /** An item on a todo list. */
 public final class Commodity {
 
   private final String name;
   private final long number;
+  private final double price;
+  private final long item_id;
+  private final String last_time;
 
-  public Commodity(String name, long number) {
+  public Commodity(String name, long number, double price, long item_id, String last_time) {
     this.name = name;
     this.number = number;
+    this.price = price;
+    this.item_id = item_id;
+    this.last_time = last_time;
   }
 }

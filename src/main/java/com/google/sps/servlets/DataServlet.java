@@ -29,10 +29,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.time.*;
+import java.time.format.*;
+import java.util.Locale;
 
 
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data/")
 public class DataServlet extends HttpServlet {
 
@@ -44,12 +46,13 @@ public class DataServlet extends HttpServlet {
     PreparedQuery results = datastore.prepare(query);
     List<Commodity> commodities = new ArrayList<>();
     for (Entity entity : results.asIterable()) {
-      long id = entity.getKey().getId();
-      String name = (String) entity.getProperty("name");
-      long number = (long) entity.getProperty("number");
-
-      Commodity commodity = new Commodity(name, number);
-      commodities.add(commodity);
+        long id = entity.getKey().getId();
+        String name = (String) entity.getProperty("name");
+        long number = (long) entity.getProperty("number");
+        double price = (double) entity.getProperty("price");
+        String last_time = (String) entity.getProperty("last_time");
+        Commodity commodity = new Commodity(name, number, price, id, last_time);
+        commodities.add(commodity);
     }
 
     Gson gson = new Gson();
@@ -63,13 +66,18 @@ public class DataServlet extends HttpServlet {
 
     String name = request.getParameter("name");
     long number = Long.parseLong(request.getParameter("number"));
+    double price = Double.parseDouble(request.getParameter("price"));
     Entity commodityEntity = new Entity("Commodity");
     commodityEntity.setProperty("name", name);
     commodityEntity.setProperty("number", number);
-
+    commodityEntity.setProperty("price", price);
+    //commodityEntity.setProperty("item_id", id++);
+    commodityEntity.setProperty("last_time", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd  hh:mm ")));
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commodityEntity);
 
     response.sendRedirect("/index.html");
   }
+
+  private long id = 0;
 }

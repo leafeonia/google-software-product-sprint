@@ -12,26 +12,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/**
- * Adds a random greeting to the page.
- */
-function loadTasks() {
-  fetch('/data/').then(response => response.json()).then((tasks) => {
-    const taskListElement = document.getElementById('task-list');
-    tasks.forEach((task) => {
-      taskListElement.appendChild(createTaskElement(task));
+
+function loadCommodities() {
+  fetch('/data/').then(response => response.json()).then((commodities) => {
+    const commodityListElement = document.getElementById('commodity-list');
+    commodities.forEach((commodity) => {
+      commodityListElement.appendChild(createCommodityElement(commodity));
     })
   });
 }
 
-/** Creates an element that represents a task, including its delete button. */
-function createTaskElement(task) {
-  const taskElement = document.createElement('li');
-  taskElement.className = 'task';
+/** Creates an element that represents a commodity */
+function createCommodityElement(commodity) {
+  const commodityElement = document.createElement('li');
+  //taskElement.className = 'task';
 
   const titleElement = document.createElement('span');
-  titleElement.innerText = task.title;
+  titleElement.innerText = "name: " + commodity.name + "  number: " + commodity.number + "  price: " + commodity.price + "  last modified on: " + commodity.last_time;
 
-  taskElement.appendChild(titleElement);
-  return taskElement;
+  commodityElement.appendChild(titleElement);
+  return commodityElement;
 }
