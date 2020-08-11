@@ -22,6 +22,18 @@ function loadCommodities() {
   });
 }
 
+function search() {
+    console.log("search");
+    fetch('/search?' + new URLSearchParams({
+        name: document.getElementById("searchByName").value,
+    })).then(response => response.json()).then((commodities) => {
+        const commodityListElement = document.getElementById('search-list');
+        commodities.forEach((commodity) => {
+            commodityListElement.appendChild(createCommodityElement(commodity));
+        })
+    });
+}
+
 /** Creates an element that represents a commodity */
 function createCommodityElement(commodity) {
   const commodityElement = document.createElement('li');
