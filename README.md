@@ -1,6 +1,19 @@
-This directory is where you'll write all of your code!
+The project implements an inventory management flutter app. This is the backend repository. For frontend flutter repository, please click [here](https://github.com/Cookiefan/google_sps_flutter).
 
-By default it contains a barebones web app. To run a local server, execute this
-command:
+### startup logo
 
-mvn package appengine:run
+<img src="demo/logo.png" style="zoom: 80%;" />
+
+
+
+### homepage
+
+<img src="demo/listpage.png" style="zoom:80%;" />
+
+### check detailed information or delete commodity
+
+<img src="demo/detailpage.png" style="zoom:80%;" />
+
+### add new commodity
+
+<img src="demo/addpage.png" style="zoom:80%;" />
