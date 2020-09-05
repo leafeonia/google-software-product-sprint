@@ -2,18 +2,22 @@ The project implements an inventory management flutter app. This is the backend 
 
 ### startup logo
 
-<img src="demo/logo.png" style="zoom: 80%;" />
+![](demo/logo.png)
 
 
 
 ### homepage
 
-<img src="demo/listpage.png" style="zoom:80%;" />
+![](demo/listpage.png)
 
 ### check detailed information or delete commodity
 
-<img src="demo/detailpage.png" style="zoom:80%;" />
+![](demo/detailpage.png)
 
 ### add new commodity
 
-<img src="demo/addpage.png" style="zoom:80%;" />
+![](demo/addpage.png)
+
+### search for commodity
+
+![](demo/searchpage.png)
